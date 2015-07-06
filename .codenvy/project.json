@@ -1,1 +1,0 @@
-{"mixinTypes":[],"builders":{"configs":{}},"runners":{"configs":{"project:/Spark":{"ram":500,"variables":{"configurationType":"python/web"},"options":{}},"recommend":{"ram":256,"variables":{},"options":{}}},"default":"project:/Spark"},"type":"python","attributes":{"language":["python"]}}
