@@ -12,8 +12,8 @@ ENV CODENVY_APP_BIND_DIR /application
 
 VOLUME ["/application"]
 
-# ADD $app$/requirements.txt /tmp/application/requirements.txt
-# ADD $app$/main.py /application/main.py
+ADD $app$/requirements.txt /tmp/application/requirements.txt
+ADD $app$/main.py /application/main.py
 
 #===========================Start Update Debian================================
 RUN apt-get -y update > /dev/null 2>&1
@@ -41,24 +41,24 @@ ENV PYTHON_VERSION 3.4.3
 ENV PYTHON_PIP_VERSION 7.0.1
 
 # work done here
-#RUN set -x > /dev/null 2>&1 \
-	#&& mkdir -p /usr/src/python > /dev/null 2>&1 \
-	#&& curl -SL "https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tar.xz" -o python.tar.xz > /dev/null 2>&1 \
-	#&& curl -SL "https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tar.xz.asc" -o python.tar.xz.asc > /dev/null 2>&1 \
-	#&& gpg --verify python.tar.xz.asc > /dev/null 2>&1 \
-	#&& tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz > /dev/null 2>&1 \
-	#&& rm python.tar.xz* > /dev/null 2>&1 \
-	#&& cd /usr/src/python > /dev/null 2>&1 \
-	#&& ./configure --enable-shared --enable-unicode=ucs4 > /dev/null 2>&1 \
-	#&& make -j$(nproc) > /dev/null 2>&1 \
-	#&& make install > /dev/null 2>&1 \
-	#&& ldconfig > /dev/null 2>&1 \
-	#&& pip3 install --upgrade pip==$PYTHON_PIP_VERSION > /dev/null 2>&1 \
-	#&& find /usr/local \
+RUN set -x > /dev/null 2>&1 \
+	&& mkdir -p /usr/src/python > /dev/null 2>&1 \
+	&& curl -SL "https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tar.xz" -o python.tar.xz > /dev/null 2>&1 \
+	&& curl -SL "https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tar.xz.asc" -o python.tar.xz.asc > /dev/null 2>&1 \
+	&& gpg --verify python.tar.xz.asc > /dev/null 2>&1 \
+	&& tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz > /dev/null 2>&1 \
+	&& rm python.tar.xz* > /dev/null 2>&1 \
+	&& cd /usr/src/python > /dev/null 2>&1 \
+	&& ./configure --enable-shared --enable-unicode=ucs4 > /dev/null 2>&1 \
+	&& make -j$(nproc) > /dev/null 2>&1 \
+	&& make install > /dev/null 2>&1 \
+	&& ldconfig > /dev/null 2>&1 \
+	&& pip3 install --upgrade pip==$PYTHON_PIP_VERSION > /dev/null 2>&1 \
+	&& find /usr/local \
 		\( -type d -a -name test -o -name tests \) \
 		-o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
 		-exec rm -rf '{}' + > /dev/null 2>&1 \
-	#&& rm -rf /usr/src/python > /dev/null 2>&1
+	&& rm -rf /usr/src/python > /dev/null 2>&1
 
 # make some useful symlinks that are expected to exist
 RUN cd /usr/local/bin > /dev/null 2>&1 \
@@ -83,13 +83,13 @@ RUN tar -xvzf spark-1.4.0.tgz -C /spark
 #===========================End Install Spark==================================
 
 #===========================Start Install virtualenv===========================
-#RUN pip3 install virtualenv
+RUN pip3 install virtualenv
 #===========================End Install virtualenv=============================
 
 #===========================Start Install Python Requirements==================
-#RUN cd /tmp/application && \
-  #  virtualenv /env && \
-    #/env/bin/pip3 install -r requirements.txt
+RUN cd /tmp/application && \
+    virtualenv /env && \
+    /env/bin/pip3 install -r requirements.txt
 #===========================End Install Python Requirements====================
    
    
