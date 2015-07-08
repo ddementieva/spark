@@ -123,7 +123,7 @@ RUN cd spark/spark-1.4.0 && build/sbt >> /dev/null 2>&1
 #===========================Start Supervisord====================================
 RUN apt-get install -y supervisor
 RUN mkdir -p /var/log/supervisor
-ADD $app$/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+#ADD $app$/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN mkdir /var/supervisord
 CMD /usr/bin/supervisord
 #===========================End Supervisord======================================
