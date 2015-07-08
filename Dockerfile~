@@ -117,7 +117,7 @@ ENV service /:root:users:/home/root:/bin/bash
 #===========================End shellinabox====================================
 
 #===========================Install Spark Part 2===============================
-RUN cd spark/spark-1.4.0 && build/sbt >> /dev/null 2>&1
+RUN cd spark/spark-1.4.0 && build/sbt assembly
 #===========================End Install Spark Part 2===========================
 
 #===========================Start Supervisord====================================
